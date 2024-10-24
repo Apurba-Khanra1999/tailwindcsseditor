@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +17,7 @@
       display: flex;
       flex-direction: row;
       height: calc(100vh - 100px);
+      transition: flex-direction 0.5s ease;
     }
 
     .editor {
@@ -23,11 +25,12 @@
       padding: 20px;
       background-color: #f5f5f5;
       border-right: 1px solid #ddd;
+      transition: flex 0.5s ease, padding 0.5s ease;
     }
 
     .textarea {
       width: 100%;
-      height:90%;
+      height: 90%;
       padding: 15px;
       font-family: monospace;
       border: 1px solid #ddd;
@@ -37,13 +40,14 @@
     }
 
     .preview-container {
-      height:90%;
+      height: 90%;
       flex: 1;
       padding: 20px;
       background-color: #ffffff;
       overflow: auto;
       border: 1px solid #ddd;
       border-radius: 4px;
+      transition: flex 0.5s ease, padding 0.5s ease;
     }
 
     .preview-header {
@@ -98,17 +102,34 @@
       width: 1024px;
       height: 1366px;
     }
+
     .full-size {
       width: 1920px;
-      height: 1080px;
+      height: 100vh;
     }
-    
 
+    /* Full-size specific layout */
+    .full-layout .editor-container {
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .full-layout .editor {
+      width: 100%;
+      height: 50vh;
+      border-right: none;
+    }
+
+    .full-layout .preview-container {
+      width: 100%;
+      height: 50vh;
+    }
   </style>
 </head>
+
 <body>
   <!-- Buttons for resizing the preview -->
-   <div class="flex justify-between items-center px-6">
+  <div class="flex justify-between items-center px-6">
     <h1 class="text-2xl font-semibold text-indigo-600">Tailwind Css Editor</h1>
     <div class="buttons-container">
       <button class="size-button" onclick="resizePreview('small')">📲 Small (320x568)</button>
@@ -116,10 +137,9 @@
       <button class="size-button" onclick="resizePreview('large')">💻 Large (1024x1366)</button>
       <button class="size-button" onclick="resizePreview('full')">🖥️ Full (1920x1080)</button>
     </div>
-   </div>
-  
+  </div>
 
-  <div class="editor-container">
+  <div class="editor-container" id="editor-container">
     <!-- Editor Section -->
     <div class="editor">
       <h2 class="text-xl text-gray-700 font-bold mb-4">Your Code goes here</h2>
@@ -133,7 +153,7 @@
 
     <!-- Live Preview Section -->
     <div>
-      <h2 class="text-center text-xl font-bold mb-4">Live Preview</h2>
+      <!-- <h2 class="text-center text-xl font-bold mb-4">Live Preview</h2> -->
       <div id="preview-container" class="preview-container">
         <div class="preview-header">Live Preview</div>
         <div id="preview" class="preview"></div>
@@ -145,6 +165,8 @@
     const editor = document.getElementById('html-editor');
     const preview = document.getElementById('preview');
     const previewContainer = document.getElementById('preview-container');
+    const editorContainer = document.getElementById('editor-container');
+    const body = document.body;
 
     // Function to update the live preview
     const updatePreview = () => {
@@ -159,7 +181,8 @@
 
     // Function to resize the preview container
     const resizePreview = (size) => {
-      previewContainer.classList.remove('small-size', 'medium-size', 'large-size','full-size');
+      previewContainer.classList.remove('small-size', 'medium-size', 'large-size', 'full-size');
+      body.classList.remove('full-layout');
 
       if (size === 'small') {
         previewContainer.classList.add('small-size');
@@ -167,19 +190,20 @@
         previewContainer.classList.add('medium-size');
       } else if (size === 'large') {
         previewContainer.classList.add('large-size');
-      } 
-      else if (size === 'full') {
+      } else if (size === 'full') {
         previewContainer.classList.add('full-size');
-      } 
-      else {
+        body.classList.add('full-layout');
+      } else {
         previewContainer.style.width = '100%';
         previewContainer.style.height = '100%';
       }
     };
+
     // Set the initial size to medium when the page loads
     window.onload = () => {
-        resizePreview('medium');
-      };
+      resizePreview('medium');
+    };
   </script>
 </body>
+
 </html>
