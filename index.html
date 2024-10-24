@@ -98,6 +98,10 @@
       width: 1024px;
       height: 1366px;
     }
+    .full-size {
+      width: 1920px;
+      height: 1080px;
+    }
     
 
   </style>
@@ -105,11 +109,12 @@
 <body>
   <!-- Buttons for resizing the preview -->
    <div class="flex justify-between items-center px-6">
-    <h1 class="text-lg font-semibold text-indigo-600">by Apurba Khanra</h1>
+    <h1 class="text-2xl font-semibold text-indigo-600">Tailwind Css Editor</h1>
     <div class="buttons-container">
       <button class="size-button" onclick="resizePreview('small')">📲 Small (320x568)</button>
       <button class="size-button" onclick="resizePreview('medium')">📟 Medium (768x1024)</button>
       <button class="size-button" onclick="resizePreview('large')">💻 Large (1024x1366)</button>
+      <button class="size-button" onclick="resizePreview('full')">🖥️ Full (1920x1080)</button>
     </div>
    </div>
   
@@ -117,11 +122,11 @@
   <div class="editor-container">
     <!-- Editor Section -->
     <div class="editor">
-      <h2 class="text-xl font-bold mb-4">HTML & Tailwind Editor</h2>
+      <h2 class="text-xl text-gray-700 font-bold mb-4">Your Code goes here</h2>
       <textarea id="html-editor" class="textarea" placeholder="Write your HTML here...">
 <div class="bg-blue-500 text-white text-center p-4 rounded-lg">
   <h1 class="text-2xl font-bold">Hello, Tailwind!</h1>
-  <p class="mt-2">This is a live Tailwind CSS editor.</p>
+  <p class="mt-2">This is a live Tailwind CSS editor by Apurba Khanra.</p>
 </div>
       </textarea>
     </div>
@@ -154,7 +159,7 @@
 
     // Function to resize the preview container
     const resizePreview = (size) => {
-      previewContainer.classList.remove('small-size', 'medium-size', 'large-size');
+      previewContainer.classList.remove('small-size', 'medium-size', 'large-size','full-size');
 
       if (size === 'small') {
         previewContainer.classList.add('small-size');
@@ -162,6 +167,9 @@
         previewContainer.classList.add('medium-size');
       } else if (size === 'large') {
         previewContainer.classList.add('large-size');
+      } 
+      else if (size === 'full') {
+        previewContainer.classList.add('full-size');
       } 
       else {
         previewContainer.style.width = '100%';
