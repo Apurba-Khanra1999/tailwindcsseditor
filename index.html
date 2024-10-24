@@ -104,11 +104,15 @@
 </head>
 <body>
   <!-- Buttons for resizing the preview -->
-  <div class="buttons-container">
-    <button class="size-button" onclick="resizePreview('small')">📲 Small (320x568)</button>
-    <button class="size-button" onclick="resizePreview('medium')">📟 Medium (768x1024)</button>
-    <button class="size-button" onclick="resizePreview('large')">💻 Large (1024x1366)</button>
-  </div>
+   <div class="flex justify-between items-center px-6">
+    <h1 class="text-lg font-semibold text-indigo-600">by Apurba Khanra</h1>
+    <div class="buttons-container">
+      <button class="size-button" onclick="resizePreview('small')">📲 Small (320x568)</button>
+      <button class="size-button" onclick="resizePreview('medium')">📟 Medium (768x1024)</button>
+      <button class="size-button" onclick="resizePreview('large')">💻 Large (1024x1366)</button>
+    </div>
+   </div>
+  
 
   <div class="editor-container">
     <!-- Editor Section -->
